@@ -19,21 +19,21 @@ export default function RoleCardsDemo() {
   const [selectedRole, setSelectedRole] = useState<Role>("werewolf");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 sm:p-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">役職カード デモ</h1>
-          <p className="text-slate-300">各役職のカードをプレビューできます</p>
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">役職カード デモ</h1>
+          <p className="text-sm sm:text-base text-slate-300">各役職のカードをプレビューできます</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-xl p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">役職を選択</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="bg-white rounded-lg shadow-xl p-4 sm:p-6 mb-6 sm:mb-8">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-3 sm:mb-4">役職を選択</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
             {ALL_ROLES.map((role) => (
               <button
                 key={role}
                 onClick={() => setSelectedRole(role)}
-                className={`px-4 py-3 rounded-lg font-medium transition-all ${
+                className={`px-3 py-2 sm:px-4 sm:py-3 rounded-lg font-medium transition-all text-sm sm:text-base ${
                   selectedRole === role
                     ? "bg-blue-600 text-white shadow-lg scale-105"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -45,19 +45,19 @@ export default function RoleCardsDemo() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-xl p-8">
+        <div className="bg-white rounded-lg shadow-xl p-4 sm:p-8">
           <div className="max-w-md mx-auto">
             <RoleCard role={selectedRole} autoReveal={false} />
-            <p className="text-center text-gray-600 mt-4">
+            <p className="text-center text-gray-600 mt-4 text-sm sm:text-base">
               カードをクリックしてフリップアニメーションを確認
             </p>
           </div>
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="mt-6 sm:mt-8 text-center">
           <a
             href="/"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
           >
             ホームに戻る
           </a>

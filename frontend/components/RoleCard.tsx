@@ -82,7 +82,7 @@ export default function RoleCard({ role, revealed = false, autoReveal = false }:
   const roleName = role ? ROLE_NAMES[role] : "不明";
 
   return (
-    <div className="perspective-1000 w-full max-w-xs mx-auto">
+    <div className="perspective-1000 w-full max-w-xs mx-auto px-4 sm:px-0">
       <div
         className={`relative w-full aspect-[2/3] cursor-pointer transition-transform duration-700 transform-style-3d ${
           isAnimating ? "animate-flip" : ""
@@ -95,33 +95,33 @@ export default function RoleCard({ role, revealed = false, autoReveal = false }:
       >
         {/* Card Back */}
         <div
-          className="absolute inset-0 backface-hidden rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 shadow-2xl p-6 flex flex-col items-center justify-center border-4 border-slate-600"
+          className="absolute inset-0 backface-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 shadow-2xl p-4 sm:p-6 flex flex-col items-center justify-center border-2 sm:border-4 border-slate-600"
           style={{ backfaceVisibility: "hidden" }}
         >
-          <div className="w-32 h-32 rounded-full bg-slate-600 flex items-center justify-center mb-4">
-            <div className="text-8xl">🎴</div>
+          <div className="w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-slate-600 flex items-center justify-center mb-2 sm:mb-4">
+            <div className="text-5xl sm:text-8xl">🎴</div>
           </div>
-          <p className="text-white text-xl font-bold mb-2">役職カード</p>
-          <p className="text-slate-300 text-sm text-center">
+          <p className="text-white text-lg sm:text-xl font-bold mb-1 sm:mb-2">役職カード</p>
+          <p className="text-slate-300 text-xs sm:text-sm text-center">
             {!isRevealed && role ? "タップして確認" : ""}
           </p>
         </div>
 
         {/* Card Front */}
         <div
-          className={`absolute inset-0 backface-hidden rounded-2xl bg-gradient-to-br ${roleColor} shadow-2xl p-6 flex flex-col items-center justify-center border-4 border-white/20`}
+          className={`absolute inset-0 backface-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br ${roleColor} shadow-2xl p-4 sm:p-6 flex flex-col items-center justify-center border-2 sm:border-4 border-white/20`}
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
         >
-          <div className="w-32 h-32 rounded-full bg-white/20 flex items-center justify-center mb-4 backdrop-blur-sm">
-            <RoleIcon className="w-20 h-20 text-white drop-shadow-lg" strokeWidth={1.5} />
+          <div className="w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-white/20 flex items-center justify-center mb-2 sm:mb-4 backdrop-blur-sm">
+            <RoleIcon className="w-12 h-12 sm:w-20 sm:h-20 text-white drop-shadow-lg" strokeWidth={1.5} />
           </div>
-          <h2 className="text-white text-3xl font-bold mb-2 drop-shadow-lg">
+          <h2 className="text-white text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 drop-shadow-lg">
             {roleName}
           </h2>
-          <div className="mt-4 text-white/80 text-sm text-center max-w-xs">
+          <div className="mt-2 sm:mt-4 text-white/80 text-xs sm:text-sm text-center max-w-xs px-2">
             {role && getRoleDescription(role)}
           </div>
         </div>

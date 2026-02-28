@@ -38,17 +38,17 @@ export default function GamePage() {
   const myRole = myPlayer?.role;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-8">
-      <div className="max-w-6xl mx-auto space-y-6">
-        <div className="bg-white rounded-lg shadow-xl p-6">
-          <div className="flex justify-between items-center mb-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 sm:p-8">
+      <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6">
+        <div className="bg-white rounded-lg shadow-xl p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">ゲーム進行中</h1>
-              <p className="text-gray-600">部屋コード: <span className="font-mono font-bold text-blue-600">{roomState.code}</span></p>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-800">ゲーム進行中</h1>
+              <p className="text-sm sm:text-base text-gray-600">部屋コード: <span className="font-mono font-bold text-blue-600">{roomState.code}</span></p>
             </div>
             <button
               onClick={handleLeaveGame}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
             >
               退出する
             </button>
@@ -57,22 +57,22 @@ export default function GamePage() {
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             {/* Role Card */}
             <div className="flex flex-col items-center">
-              <h2 className="text-lg font-semibold text-gray-800 mb-4">あなたの役職</h2>
+              <h2 className="text-base sm:text-lg font-semibold text-gray-800 mb-4">あなたの役職</h2>
               <RoleCard role={myRole} autoReveal={true} />
             </div>
 
             {/* Players List */}
             <div>
-              <h2 className="text-lg font-semibold text-gray-800 mb-3">参加者一覧</h2>
+              <h2 className="text-base sm:text-lg font-semibold text-gray-800 mb-3">参加者一覧</h2>
               <div className="grid grid-cols-2 gap-2">
                 {roomState.players?.map((player) => (
                   <div
                     key={player.id}
-                    className={`p-3 rounded-lg ${
+                    className={`p-2 sm:p-3 rounded-lg ${
                       player.isAlive ? "bg-green-100" : "bg-gray-200"
                     }`}
                   >
-                    <p className="font-medium text-gray-800">
+                    <p className="font-medium text-gray-800 text-sm sm:text-base truncate">
                       {player.nickname}
                       {!player.isAlive && <span className="ml-2 text-xs text-red-600">死亡</span>}
                     </p>
