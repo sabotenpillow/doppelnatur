@@ -1,0 +1,34 @@
+# GCP Project Configuration
+project_id   = "your-gcp-project-id"
+project_name = "doppelnature"
+region       = "asia-northeast1"
+environment  = "production"
+
+# Domain Configuration
+domains = [
+  "yourdomain.com",
+  "www.yourdomain.com"
+]
+
+cors_origins = [
+  "https://yourdomain.com",
+  "https://www.yourdomain.com"
+]
+
+# Database Configuration
+db_tier           = "db-f1-micro"  # For production: db-custom-2-7680 or higher
+db_disk_size      = 20
+database_name     = "doppelnature"
+database_user     = "dbuser"
+database_password = "CHANGE_ME_TO_SECURE_PASSWORD"
+
+# Cloud Run Images
+backend_image  = "gcr.io/your-gcp-project-id/backend:latest"
+frontend_image = "gcr.io/your-gcp-project-id/frontend:latest"
+
+# Scaling Configuration
+min_instances = 1  # Set to 0 to scale to zero when no traffic
+max_instances = 10
+
+# Protection
+enable_deletion_protection = true
