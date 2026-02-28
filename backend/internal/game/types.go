@@ -9,6 +9,8 @@ const (
 	RoleMedium   Role = "medium"
 	RoleKnight   Role = "knight"
 	RoleMadman   Role = "madman"
+	RoleFox      Role = "fox"
+	RoleTwins    Role = "twins"
 )
 
 type GameState string
