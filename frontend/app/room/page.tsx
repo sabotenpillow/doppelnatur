@@ -6,6 +6,7 @@ import { useWebSocket } from "@/hooks/useWebSocket";
 import { useLanguage } from "@/context/LanguageContext";
 import { Role, RoleConfig } from "@/types/game";
 import { UserX } from "lucide-react";
+import InviteButton from "@/components/InviteButton";
 
 const ROLE_NAMES: Record<Role, string> = {
   werewolf: "人狼",
@@ -97,17 +98,26 @@ export default function RoomPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 sm:p-8">
       <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
         <div className="bg-white rounded-lg shadow-xl p-4 sm:p-6">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-800">待機ルーム</h1>
-              <p className="text-sm sm:text-base text-gray-600">部屋コード: <span className="font-mono font-bold text-blue-600">{roomState.code}</span></p>
+          <div className="flex flex-col gap-4 mb-6">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-800">{t("room.title")}</h1>
+                <p className="text-sm sm:text-base text-gray-600">
+                  {t("room.roomCode")}: <span className="font-mono font-bold text-blue-600">{roomState.code}</span>
+                </p>
+              </div>
+              <button
+                onClick={handleLeaveRoom}
+                className="w-full sm:w-auto px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                {t("room.leave")}
+              </button>
             </div>
-            <button
-              onClick={handleLeaveRoom}
-              className="w-full sm:w-auto px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-            >
-              退室する
-            </button>
+
+            {/* Invite Button */}
+            <div className="flex justify-center sm:justify-start">
+              <InviteButton roomCode={roomState.code} />
+            </div>
           </div>
 
           <div className="mb-6">

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useWebSocket } from "@/hooks/useWebSocket";
 import { useLanguage } from "@/context/LanguageContext";
@@ -13,8 +13,17 @@ export default function Home() {
   const [roomCode, setRoomCode] = useState("");
   const [isCreating, setIsCreating] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { isConnected, createRoom, joinRoom, error } = useWebSocket();
   const { t } = useLanguage();
+
+  // Auto-fill room code from URL parameter
+  useEffect(() => {
+    const roomParam = searchParams.get("room");
+    if (roomParam) {
+      setRoomCode(roomParam.toUpperCase());
+    }
+  }, [searchParams]);
 
   const handleCreateRoom = () => {
     if (nickname.trim()) {
