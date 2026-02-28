@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Role } from "@/types/game";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   Wolf,
   User,
@@ -30,17 +31,6 @@ const ROLE_ICONS: Record<Role, React.ComponentType<any>> = {
   twins: Users,
 };
 
-const ROLE_NAMES: Record<Role, string> = {
-  werewolf: "人狼",
-  villager: "村人",
-  seer: "占い師",
-  medium: "霊媒師",
-  knight: "騎士",
-  madman: "狂人",
-  fox: "狐",
-  twins: "双子",
-};
-
 const ROLE_COLORS: Record<Role, string> = {
   werewolf: "from-red-600 to-red-800",
   villager: "from-green-600 to-green-800",
@@ -55,6 +45,7 @@ const ROLE_COLORS: Record<Role, string> = {
 export default function RoleCard({ role, revealed = false, autoReveal = false }: RoleCardProps) {
   const [isRevealed, setIsRevealed] = useState(revealed);
   const [isAnimating, setIsAnimating] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (autoReveal && role && !isRevealed) {
@@ -79,7 +70,8 @@ export default function RoleCard({ role, revealed = false, autoReveal = false }:
 
   const RoleIcon = role ? ROLE_ICONS[role] : User;
   const roleColor = role ? ROLE_COLORS[role] : "from-gray-600 to-gray-800";
-  const roleName = role ? ROLE_NAMES[role] : "不明";
+  const roleName = role ? t(`roles.${role}`) : t("common.loading");
+  const roleDescription = role ? t(`roleDescriptions.${role}`) : "";
 
   return (
     <div className="perspective-1000 w-full max-w-xs mx-auto px-4 sm:px-0">
@@ -101,9 +93,9 @@ export default function RoleCard({ role, revealed = false, autoReveal = false }:
           <div className="w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-slate-600 flex items-center justify-center mb-2 sm:mb-4">
             <div className="text-5xl sm:text-8xl">🎴</div>
           </div>
-          <p className="text-white text-lg sm:text-xl font-bold mb-1 sm:mb-2">役職カード</p>
+          <p className="text-white text-lg sm:text-xl font-bold mb-1 sm:mb-2">{t("card.roleCard")}</p>
           <p className="text-slate-300 text-xs sm:text-sm text-center">
-            {!isRevealed && role ? "タップして確認" : ""}
+            {!isRevealed && role ? t("card.tapToReveal") : ""}
           </p>
         </div>
 
@@ -122,7 +114,7 @@ export default function RoleCard({ role, revealed = false, autoReveal = false }:
             {roleName}
           </h2>
           <div className="mt-2 sm:mt-4 text-white/80 text-xs sm:text-sm text-center max-w-xs px-2">
-            {role && getRoleDescription(role)}
+            {roleDescription}
           </div>
         </div>
       </div>
@@ -154,18 +146,4 @@ export default function RoleCard({ role, revealed = false, autoReveal = false }:
       `}</style>
     </div>
   );
-}
-
-function getRoleDescription(role: Role): string {
-  const descriptions: Record<Role, string> = {
-    werewolf: "夜に1人を襲撃できる",
-    villager: "特殊能力なし",
-    seer: "夜に1人を占える",
-    medium: "処刑された人を判定",
-    knight: "1人を襲撃から守る",
-    madman: "人狼陣営の村人",
-    fox: "襲撃されても死なない",
-    twins: "相方を知っている",
-  };
-  return descriptions[role];
 }

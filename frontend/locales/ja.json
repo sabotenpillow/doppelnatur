@@ -1,0 +1,86 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "back": "戻る",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "save": "保存",
+    "close": "閉じる"
+  },
+  "home": {
+    "title": "人狼ゲーム",
+    "subtitle": "オンライン人狼ゲームへようこそ",
+    "connecting": "サーバーに接続中...",
+    "nickname": "ニックネーム",
+    "nicknamePlaceholder": "あなたの名前を入力",
+    "createRoom": "新しい部屋を作る",
+    "or": "または",
+    "roomCode": "部屋コード",
+    "roomCodePlaceholder": "6文字のコードを入力",
+    "joinRoom": "部屋に参加する"
+  },
+  "room": {
+    "title": "待機ルーム",
+    "roomCode": "部屋コード",
+    "leave": "退室する",
+    "participants": "参加者",
+    "participantsCount": "{{count}}名",
+    "admin": "管理者",
+    "roleSettings": "役職設定",
+    "roleSettingsInfo": "合計: {{total}} / 参加者: {{players}}",
+    "setRoles": "役職を設定",
+    "startGame": "ゲーム開始",
+    "roleCountMismatch": "役職の合計人数が参加者数と一致していません",
+    "waitingForAdmin": "管理者がゲームの設定を行っています..."
+  },
+  "game": {
+    "title": "ゲーム進行中",
+    "roomCode": "部屋コード",
+    "leave": "退出する",
+    "yourRole": "あなたの役職",
+    "participants": "参加者一覧",
+    "dead": "死亡",
+    "gameStarted": "ゲームが開始されました。ゲーム進行機能は次のフェーズで実装されます。",
+    "upcomingFeatures": "次のフェーズで実装予定",
+    "dayNightTurns": "昼・夜のターン制御",
+    "votingSystem": "投票システム",
+    "roleAbilities": "各役職の能力実行",
+    "winCondition": "勝敗判定"
+  },
+  "demo": {
+    "title": "役職カード デモ",
+    "subtitle": "各役職のカードをプレビューできます",
+    "selectRole": "役職を選択",
+    "clickToFlip": "カードをクリックしてフリップアニメーションを確認",
+    "backToHome": "ホームに戻る"
+  },
+  "roles": {
+    "werewolf": "人狼",
+    "villager": "村人",
+    "seer": "占い師",
+    "medium": "霊媒師",
+    "knight": "騎士",
+    "madman": "狂人",
+    "fox": "狐",
+    "twins": "双子"
+  },
+  "roleDescriptions": {
+    "werewolf": "夜に1人を襲撃できる",
+    "villager": "特殊能力なし",
+    "seer": "夜に1人を占える",
+    "medium": "処刑された人を判定",
+    "knight": "1人を襲撃から守る",
+    "madman": "人狼陣営の村人",
+    "fox": "襲撃されても死なない",
+    "twins": "相方を知っている"
+  },
+  "card": {
+    "roleCard": "役職カード",
+    "tapToReveal": "タップして確認"
+  },
+  "settings": {
+    "title": "設定",
+    "language": "言語",
+    "selectLanguage": "言語を選択"
+  }
+}
