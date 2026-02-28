@@ -17,7 +17,8 @@
     "or": "or",
     "roomCode": "Room Code",
     "roomCodePlaceholder": "Enter 6-character code",
-    "joinRoom": "Join Room"
+    "joinRoom": "Join Room",
+    "howToPlay": "How to Play"
   },
   "room": {
     "title": "Waiting Room",
@@ -82,5 +83,65 @@
     "title": "Settings",
     "language": "Language",
     "selectLanguage": "Select Language"
+  },
+  "howToPlay": {
+    "title": "How to Play Werewolf Game",
+    "overview": {
+      "title": "Game Overview",
+      "description": "Werewolf is a deduction game where players are divided into villager and werewolf teams. Through daytime discussions and voting, and nighttime role actions, teams aim to eliminate the opposing faction."
+    },
+    "gameFlow": {
+      "title": "Game Flow",
+      "step1": "1. Role Assignment",
+      "step1Desc": "At game start, each player is randomly assigned a role. Keep your role secret.",
+      "step2": "2. Night Phase",
+      "step2Desc": "Werewolves choose someone to attack, seers choose someone to divine. Each role uses their ability.",
+      "step3": "3. Day Phase",
+      "step3Desc": "Night results are announced. Everyone discusses and deduces who might be a werewolf.",
+      "step4": "4. Voting",
+      "step4Desc": "After discussion, vote to execute someone. The person with the most votes is executed.",
+      "step5": "5. Victory Check",
+      "step5Desc": "Repeat steps 2-4 until one team's victory condition is met."
+    },
+    "teams": {
+      "title": "Teams",
+      "villagers": "Villager Team",
+      "villagersDesc": "Win by eliminating all werewolves",
+      "werewolves": "Werewolf Team",
+      "werwolvesDesc": "Win by reducing villagers to equal or fewer than werewolves",
+      "fox": "Fox Team",
+      "foxDesc": "Win by surviving until the end (solo)"
+    },
+    "roles": {
+      "title": "Role List",
+      "werewolf": "Werewolf",
+      "werewolfDesc": "Can attack and kill one person at night. Knows other werewolves. Detected as werewolf when divined.",
+      "villager": "Villager",
+      "villagerDesc": "No special abilities, but a fundamental villager team role. Find werewolves through discussion and voting.",
+      "seer": "Seer",
+      "seerDesc": "Can divine one person at night to learn if they're a werewolf. A crucial information source for the villager team.",
+      "medium": "Medium",
+      "mediumDesc": "Can learn if the person executed the previous day was a werewolf. Cooperate with the seer to identify werewolves.",
+      "knight": "Knight",
+      "knightDesc": "Can protect one person at night from werewolf attacks. Guard important players.",
+      "madman": "Madman",
+      "madmanDesc": "A villager on the werewolf team. Appears as villager when divined. Pretend to be a werewolf to confuse the village.",
+      "fox": "Fox",
+      "foxDesc": "Third faction. Survives werewolf attacks but dies if divined. Win solo by surviving until the end.",
+      "twins": "Twins",
+      "twinsDesc": "A pair of roles. Know each other's identity. Cooperate as the villager team."
+    },
+    "tips": {
+      "title": "Victory Tips",
+      "tip1": "Distinguish lies from truth",
+      "tip1Desc": "Observe who's telling the truth by watching for contradictions and behaviors.",
+      "tip2": "Utilize your role",
+      "tip2Desc": "Make the most of your role's abilities and contribute to your team.",
+      "tip3": "Organize information",
+      "tip3Desc": "Record each player's statements and actions to find inconsistencies.",
+      "tip4": "Participate in discussion",
+      "tip4Desc": "Silence raises suspicion. Actively participate in discussions."
+    },
+    "backToHome": "Back to Home"
   }
 }

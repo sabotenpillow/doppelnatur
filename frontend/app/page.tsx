@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useWebSocket } from "@/hooks/useWebSocket";
 import { useLanguage } from "@/context/LanguageContext";
 import LanguageSelector from "@/components/LanguageSelector";
+import { BookOpen } from "lucide-react";
 
 export default function Home() {
   const [nickname, setNickname] = useState("");
@@ -35,7 +37,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-slate-900 to-slate-800">
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-4 right-4 flex gap-3">
+        <Link
+          href="/how-to-play"
+          className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 hover:shadow-lg transition-all"
+        >
+          <BookOpen className="w-4 h-4" />
+          <span className="text-sm font-medium hidden sm:inline">{t("home.howToPlay")}</span>
+        </Link>
         <LanguageSelector />
       </div>
       
