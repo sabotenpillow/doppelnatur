@@ -42,6 +42,17 @@ export function useWebSocket() {
       console.log("Player left:", data);
     });
 
+    ws.on("player_kicked", (data) => {
+      console.log("Player kicked:", data);
+    });
+
+    ws.on("kicked", (data) => {
+      console.log("You were kicked:", data);
+      setError("あなたは管理者により退室させられました");
+      // Clear room state
+      setRoomState(null);
+    });
+
     ws.on("roles_updated", (data) => {
       console.log("Roles updated:", data);
     });
@@ -90,6 +101,12 @@ export function useWebSocket() {
     }
   }, []);
 
+  const kickPlayer = useCallback((targetPlayerId: string) => {
+    if (wsRef.current) {
+      wsRef.current.send("kick_player", { targetPlayerId });
+    }
+  }, []);
+
   return {
     isConnected,
     roomState,
@@ -99,5 +116,6 @@ export function useWebSocket() {
     leaveRoom,
     setRoles,
     startGame,
+    kickPlayer,
   };
 }

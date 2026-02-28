@@ -27,12 +27,15 @@
     "participants": "Participants",
     "participantsCount": "{{count}} players",
     "admin": "Admin",
+    "kick": "Kick",
+    "kickConfirm": "Kick {{name}} from the room?",
     "roleSettings": "Role Settings",
     "roleSettingsInfo": "Total: {{total}} / Players: {{players}}",
     "setRoles": "Set Roles",
     "startGame": "Start Game",
     "roleCountMismatch": "Total role count doesn't match player count",
-    "waitingForAdmin": "Waiting for admin to configure the game..."
+    "waitingForAdmin": "Waiting for admin to configure the game...",
+    "youWereKicked": "You were kicked by the admin"
   },
   "game": {
     "title": "Game in Progress",

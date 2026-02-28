@@ -81,6 +81,8 @@ func (h *Hub) handleMessage(msg *Message) {
 		h.handleJoinRoom(msg)
 	case "leave_room":
 		h.handleLeaveRoom(msg)
+	case "kick_player":
+		h.handleKickPlayer(msg)
 	case "set_roles":
 		h.handleSetRoles(msg)
 	case "start_game":
@@ -170,6 +172,83 @@ func (h *Hub) handleLeaveRoom(msg *Message) {
 			"playerId": msg.PlayerID,
 		})
 		h.broadcastToRoom(roomCode, "room_state", room.GetState())
+	}
+}
+
+func (h *Hub) handleKickPlayer(msg *Message) {
+	roomCode := msg.RoomCode
+	if roomCode == "" {
+		h.mu.RLock()
+		if client, ok := h.Clients[msg.PlayerID]; ok {
+			roomCode = client.RoomCode
+		}
+		h.mu.RUnlock()
+	}
+
+	if roomCode == "" {
+		return
+	}
+
+	targetPlayerID, ok := msg.Payload["targetPlayerId"].(string)
+	if !ok {
+		h.sendToClient(msg.PlayerID, "error", map[string]interface{}{
+			"message": "Target player ID is required",
+		})
+		return
+	}
+
+	room, err := h.RoomMgr.GetRoom(roomCode)
+	if err != nil {
+		h.sendToClient(msg.PlayerID, "error", map[string]interface{}{
+			"message": err.Error(),
+		})
+		return
+	}
+
+	// Check if requester is admin
+	if room.AdminID != msg.PlayerID {
+		h.sendToClient(msg.PlayerID, "error", map[string]interface{}{
+			"message": "Only admin can kick players",
+		})
+		return
+	}
+
+	// Cannot kick yourself
+	if targetPlayerID == msg.PlayerID {
+		h.sendToClient(msg.PlayerID, "error", map[string]interface{}{
+			"message": "Cannot kick yourself",
+		})
+		return
+	}
+
+	// Remove target player from room
+	err = h.RoomMgr.LeaveRoom(roomCode, targetPlayerID)
+	if err != nil {
+		h.sendToClient(msg.PlayerID, "error", map[string]interface{}{
+			"message": err.Error(),
+		})
+		return
+	}
+
+	// Clear target client's room code
+	h.mu.Lock()
+	if client, ok := h.Clients[targetPlayerID]; ok {
+		client.RoomCode = ""
+	}
+	h.mu.Unlock()
+
+	// Notify target player that they were kicked
+	h.sendToClient(targetPlayerID, "kicked", map[string]interface{}{
+		"roomCode": roomCode,
+	})
+
+	// Broadcast to remaining players
+	updatedRoom, err := h.RoomMgr.GetRoom(roomCode)
+	if err == nil {
+		h.broadcastToRoom(roomCode, "player_kicked", map[string]interface{}{
+			"playerId": targetPlayerID,
+		})
+		h.broadcastToRoom(roomCode, "room_state", updatedRoom.GetState())
 	}
 }
 

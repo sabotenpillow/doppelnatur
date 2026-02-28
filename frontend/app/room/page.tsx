@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useWebSocket } from "@/hooks/useWebSocket";
+import { useLanguage } from "@/context/LanguageContext";
 import { Role, RoleConfig } from "@/types/game";
+import { UserX } from "lucide-react";
 
 const ROLE_NAMES: Record<Role, string> = {
   werewolf: "人狼",
@@ -20,7 +22,8 @@ const AVAILABLE_ROLES: Role[] = ["werewolf", "villager", "seer", "medium", "knig
 
 export default function RoomPage() {
   const router = useRouter();
-  const { roomState, isConnected, leaveRoom, setRoles, startGame } = useWebSocket();
+  const { roomState, isConnected, leaveRoom, setRoles, startGame, kickPlayer } = useWebSocket();
+  const { t } = useLanguage();
   const [roleConfigs, setRoleConfigs] = useState<Record<Role, number>>({
     werewolf: 1,
     villager: 3,
@@ -71,6 +74,12 @@ export default function RoomPage() {
     startGame();
   };
 
+  const handleKickPlayer = (playerId: string, playerName: string) => {
+    if (confirm(t("room.kickConfirm", { name: playerName }))) {
+      kickPlayer(playerId);
+    }
+  };
+
   const totalRoles = Object.values(roleConfigs).reduce((sum, count) => sum + count, 0);
   const playerCount = roomState?.players?.length || 0;
   const isAdmin = roomState?.players?.find((p) => p.isAdmin)?.id === roomState?.adminId;
@@ -102,19 +111,30 @@ export default function RoomPage() {
           </div>
 
           <div className="mb-6">
-            <h2 className="text-base sm:text-lg font-semibold text-gray-800 mb-3">参加者 ({playerCount}名)</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-800 mb-3">{t("room.participants")} ({t("room.participantsCount", { count: playerCount })})</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {roomState.players?.map((player) => (
                 <div
                   key={player.id}
-                  className={`p-2 sm:p-3 rounded-lg ${
+                  className={`p-2 sm:p-3 rounded-lg flex items-center justify-between ${
                     player.isAdmin ? "bg-yellow-100 border-2 border-yellow-400" : "bg-gray-100"
                   }`}
                 >
-                  <p className="font-medium text-gray-800 text-sm sm:text-base truncate">
-                    {player.nickname}
-                    {player.isAdmin && <span className="ml-1 sm:ml-2 text-xs text-yellow-600">管理者</span>}
-                  </p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-gray-800 text-sm sm:text-base truncate">
+                      {player.nickname}
+                      {player.isAdmin && <span className="ml-1 sm:ml-2 text-xs text-yellow-600">{t("room.admin")}</span>}
+                    </p>
+                  </div>
+                  {isAdmin && !player.isAdmin && roomState.state === "waiting" && (
+                    <button
+                      onClick={() => handleKickPlayer(player.id, player.nickname)}
+                      className="ml-2 p-1.5 text-red-600 hover:bg-red-50 rounded transition-colors"
+                      title={t("room.kick")}
+                    >
+                      <UserX className="w-4 h-4" />
+                    </button>
+                  )}
                 </div>
               ))}
             </div>

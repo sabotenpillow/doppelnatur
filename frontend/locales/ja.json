@@ -27,12 +27,15 @@
     "participants": "参加者",
     "participantsCount": "{{count}}名",
     "admin": "管理者",
+    "kick": "退室させる",
+    "kickConfirm": "{{name}}を退室させますか？",
     "roleSettings": "役職設定",
     "roleSettingsInfo": "合計: {{total}} / 参加者: {{players}}",
     "setRoles": "役職を設定",
     "startGame": "ゲーム開始",
     "roleCountMismatch": "役職の合計人数が参加者数と一致していません",
-    "waitingForAdmin": "管理者がゲームの設定を行っています..."
+    "waitingForAdmin": "管理者がゲームの設定を行っています...",
+    "youWereKicked": "管理者により退室させられました"
   },
   "game": {
     "title": "ゲーム進行中",
