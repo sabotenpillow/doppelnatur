@@ -111,6 +111,10 @@ func (m *Manager) JoinRoom(code, playerID, nickname string) (*Room, error) {
 		return nil, ErrGameStarted
 	}
 
+	if _, exists := room.Players[playerID]; exists {
+		return nil, errors.New("player already in room")
+	}
+
 	if len(room.Players) >= MaxPlayers {
 		return nil, ErrRoomFull
 	}
@@ -160,6 +164,22 @@ func (m *Manager) LeaveRoom(code, playerID string) error {
 	}
 
 	return nil
+}
+
+func (m *Manager) SetRoles(code, playerID string, roleConfigs []game.RoleConfig) error {
+	room, err := m.GetRoom(code)
+	if err != nil {
+		return err
+	}
+	return room.SetRoles(playerID, roleConfigs)
+}
+
+func (m *Manager) StartGame(code, playerID string) error {
+	room, err := m.GetRoom(code)
+	if err != nil {
+		return err
+	}
+	return room.StartGame(playerID)
 }
 
 func (r *Room) SetRoles(playerID string, roleConfigs []game.RoleConfig) error {
