@@ -1,0 +1,86 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "back": "Back",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "close": "Close"
+  },
+  "home": {
+    "title": "Werewolf Game",
+    "subtitle": "Welcome to Online Werewolf Game",
+    "connecting": "Connecting to server...",
+    "nickname": "Nickname",
+    "nicknamePlaceholder": "Enter your name",
+    "createRoom": "Create New Room",
+    "or": "or",
+    "roomCode": "Room Code",
+    "roomCodePlaceholder": "Enter 6-character code",
+    "joinRoom": "Join Room"
+  },
+  "room": {
+    "title": "Waiting Room",
+    "roomCode": "Room Code",
+    "leave": "Leave Room",
+    "participants": "Participants",
+    "participantsCount": "{{count}} players",
+    "admin": "Admin",
+    "roleSettings": "Role Settings",
+    "roleSettingsInfo": "Total: {{total}} / Players: {{players}}",
+    "setRoles": "Set Roles",
+    "startGame": "Start Game",
+    "roleCountMismatch": "Total role count doesn't match player count",
+    "waitingForAdmin": "Waiting for admin to configure the game..."
+  },
+  "game": {
+    "title": "Game in Progress",
+    "roomCode": "Room Code",
+    "leave": "Leave Game",
+    "yourRole": "Your Role",
+    "participants": "Participants",
+    "dead": "Dead",
+    "gameStarted": "The game has started. Game progression features will be implemented in the next phase.",
+    "upcomingFeatures": "Upcoming Features",
+    "dayNightTurns": "Day/Night turn control",
+    "votingSystem": "Voting system",
+    "roleAbilities": "Role ability execution",
+    "winCondition": "Win condition detection"
+  },
+  "demo": {
+    "title": "Role Cards Demo",
+    "subtitle": "Preview each role card",
+    "selectRole": "Select Role",
+    "clickToFlip": "Click card to see flip animation",
+    "backToHome": "Back to Home"
+  },
+  "roles": {
+    "werewolf": "Werewolf",
+    "villager": "Villager",
+    "seer": "Seer",
+    "medium": "Medium",
+    "knight": "Knight",
+    "madman": "Madman",
+    "fox": "Fox",
+    "twins": "Twins"
+  },
+  "roleDescriptions": {
+    "werewolf": "Can attack one person at night",
+    "villager": "No special abilities",
+    "seer": "Can divine one person at night",
+    "medium": "Can check executed person",
+    "knight": "Can protect one from attack",
+    "madman": "Werewolf team villager",
+    "fox": "Survives werewolf attacks",
+    "twins": "Know each other's identity"
+  },
+  "card": {
+    "roleCard": "Role Card",
+    "tapToReveal": "Tap to reveal"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "selectLanguage": "Select Language"
+  }
+}

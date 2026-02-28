@@ -2,9 +2,10 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import ja from "@/locales/ja.json";
-import en from "@/locales/en.json";
+import enUS from "@/locales/en-US.json";
+import enGB from "@/locales/en-GB.json";
 
-type Locale = "ja" | "en";
+type Locale = "ja" | "en-US" | "en-GB";
 
 type Translations = typeof ja;
 
@@ -16,7 +17,8 @@ interface LanguageContextType {
 
 const translations: Record<Locale, Translations> = {
   ja,
-  en,
+  "en-US": enUS,
+  "en-GB": enGB,
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -26,8 +28,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const savedLocale = localStorage.getItem("locale") as Locale;
-    if (savedLocale && (savedLocale === "ja" || savedLocale === "en")) {
+    if (savedLocale && translations[savedLocale]) {
       setLocaleState(savedLocale);
+    } else if (savedLocale === "en") {
+      // Migrate old "en" to "en-US" for backward compatibility
+      setLocaleState("en-US");
+      localStorage.setItem("locale", "en-US");
     }
   }, []);
 

@@ -10,7 +10,8 @@ export default function LanguageSelector() {
 
   const languages = [
     { code: "ja" as const, name: "日本語", flag: "🇯🇵" },
-    { code: "en" as const, name: "English", flag: "🇺🇸" },
+    { code: "en-US" as const, name: "English (US)", flag: "🇺🇸" },
+    { code: "en-GB" as const, name: "English (UK)", flag: "🇬🇧" },
   ];
 
   const currentLanguage = languages.find((lang) => lang.code === locale);
