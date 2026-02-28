@@ -1,0 +1,106 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useWebSocket } from "@/hooks/useWebSocket";
+
+export default function Home() {
+  const [nickname, setNickname] = useState("");
+  const [roomCode, setRoomCode] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
+  const router = useRouter();
+  const { isConnected, createRoom, joinRoom, error } = useWebSocket();
+
+  const handleCreateRoom = () => {
+    if (nickname.trim()) {
+      setIsCreating(true);
+      createRoom(nickname);
+      setTimeout(() => {
+        router.push(`/room`);
+      }, 500);
+    }
+  };
+
+  const handleJoinRoom = () => {
+    if (nickname.trim() && roomCode.trim()) {
+      joinRoom(roomCode.toUpperCase(), nickname);
+      setTimeout(() => {
+        router.push(`/room`);
+      }, 500);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-gradient-to-br from-slate-900 to-slate-800">
+      <div className="max-w-md w-full space-y-8">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-white mb-2">人狼ゲーム</h1>
+          <p className="text-slate-300">オンライン人狼ゲームへようこそ</p>
+          {!isConnected && (
+            <p className="text-yellow-400 mt-2">サーバーに接続中...</p>
+          )}
+          {error && <p className="text-red-400 mt-2">{error}</p>}
+        </div>
+
+        <div className="bg-white rounded-lg shadow-xl p-6 space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              ニックネーム
+            </label>
+            <input
+              type="text"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="あなたの名前を入力"
+              disabled={!isConnected}
+            />
+          </div>
+
+          <div className="space-y-4">
+            <button
+              onClick={handleCreateRoom}
+              disabled={!isConnected || !nickname.trim() || isCreating}
+              className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            >
+              新しい部屋を作る
+            </button>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">または</span>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                部屋コード
+              </label>
+              <input
+                type="text"
+                value={roomCode}
+                onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent uppercase"
+                placeholder="6文字のコードを入力"
+                maxLength={6}
+                disabled={!isConnected}
+              />
+            </div>
+
+            <button
+              onClick={handleJoinRoom}
+              disabled={!isConnected || !nickname.trim() || !roomCode.trim()}
+              className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            >
+              部屋に参加する
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
